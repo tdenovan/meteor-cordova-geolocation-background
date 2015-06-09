@@ -228,24 +228,31 @@ for (var key in window) {
 
     var options = _.extend({
       data: {
-        longitude: location.longitude,
+        longitude: location.longitude, 
         latitude: location.latitude,
+        speed: location.speed,
+        accuracy: location.accuracy,
+        heading: location.heading,
         userId: GeolocationBG.userId(),
         uuid: GeolocationBG.uuid(),
         device: GeolocationBG.device()
       }
     }, this.options);
-
-    HTTP.call('POST', this.options.url, options, function(err, res) {
-      if (err) {
-        console.error('HTTP.call() callback error');
-        console.error(JSON.stringify(err));
-        return;
-      }
+    
+    $.post(this.options.url, options.data, function(res) {
       console.log('[debugging] HTTP.call() callback');
       console.error(JSON.stringify(res));
+      if (this.responseText == 'stop') GeolocationBG.stop();
       GeolocationBG.sendCallbackSuccess(res);
+    }).fail(function(xhr, error) {
+      console.error('HTTP.call() callback error');
+      console.error(JSON.stringify(xhr), JSON.stringify(error));
+      GeolocationBG.bgGeo.finish(); // Have to send finish even if there is an error
     });
+    // HTTP.call('POST', this.options.url, options, function(err, res) {
+    //   if (err) {
+    //   }
+    // });
   },
 
   /**

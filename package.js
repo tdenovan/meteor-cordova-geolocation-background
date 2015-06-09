@@ -1,13 +1,13 @@
 Package.describe({
   summary: "Cordova enabled background geolocation, even when closed/suspended",
-  version: "0.0.7",
-  name: "zeroasterisk:cordova-geolocation-background",
+  version: "0.0.10",
+  name: "ketings:cordova-geolocation-background",
   git: "https://github.com/zeroasterisk/meteor-cordova-geolocation-background"
 });
 
 Cordova.depends({
   // http://plugins.cordova.io/#/package/com.romainstrock.cordova.background-geolocation
-  'com.romainstrock.cordova.background-geolocation': '0.3.9',
+  // 'com.romainstrock.cordova.background-geolocation': '0.3.9',
   'org.apache.cordova.geolocation': '0.3.12',
   'org.apache.cordova.device': '0.2.11'
 });
